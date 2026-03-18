@@ -9,6 +9,16 @@
     <style>
         body { font-family: 'Poppins', sans-serif; }
 
+        /* Hero background pan left-right */
+        @keyframes heroPan {
+            0%   { background-position: left bottom; }
+            50%  { background-position: right bottom; }
+            100% { background-position: left bottom; }
+        }
+        .hero-pan {
+            animation: heroPan 18s ease-in-out infinite;
+        }
+
         /* Mirror glass reflection effect */
         .mirror-card {
             -webkit-box-reflect: below 6px
@@ -55,7 +65,7 @@
     <!-- Hero Header -->
     <!-- FIX: w-full instead of w-screen to prevent horizontal overflow -->
     <header
-        class="w-full min-h-screen bg-cover bg-bottom flex items-end justify-center"
+        class="hero-pan w-full min-h-screen bg-cover flex items-end justify-center"
         style="background-image: url('./images/bg1.JPG');"
     >
         <!-- FIX: responsive bottom margin and heading sizes -->
@@ -312,4 +322,3 @@
     </script>
 </body>
 </html>
-
