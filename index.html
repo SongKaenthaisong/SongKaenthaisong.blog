@@ -19,6 +19,26 @@
             animation: heroPan 18s ease-in-out infinite;
         }
 
+        /* Explore background pan right-to-left */
+        @keyframes explorePan {
+            0%   { background-position: right center; }
+            50%  { background-position: left center; }
+            100% { background-position: right center; }
+        }
+        .explore-pan {
+            animation: explorePan 18s ease-in-out infinite;
+        }
+
+        /* Photo grid zoom in/out */
+        @keyframes zoomInOut {
+            0%   { transform: scale(1); }
+            50%  { transform: scale(1.12); }
+            100% { transform: scale(1); }
+        }
+        .zoom-loop {
+            animation: zoomInOut 6s ease-in-out infinite;
+        }
+
         /* Mirror glass reflection effect */
         .mirror-card {
             -webkit-box-reflect: below 6px
@@ -70,14 +90,10 @@
     >
         <!-- FIX: responsive bottom margin and heading sizes -->
         <div class="mb-16 md:mb-36 text-white text-center px-4">
-            <h2 class="text-xl md:text-3xl font-medium">Explore The Colorful World</h2>
             <div class="w-36 h-1 bg-red-600 mx-auto my-3 rounded-full"></div>
             <h1 class="text-3xl md:text-5xl lg:text-6xl font-semibold mt-6 md:mt-12 mb-6 md:mb-8">
                 "LIFE IS A WONDERFUL GIFT"
             </h1>
-            <a href="#" class="bg-red-500 text-white px-6 py-2 rounded-full hover:bg-white hover:text-pink-500 transition-colors">
-                Learn More
-            </a>
         </div>
     </header>
 
@@ -139,17 +155,13 @@
 
     <!-- Explore Section -->
     <section
-        class="w-full min-h-screen bg-cover bg-center bg-no-repeat flex items-center"
+        class="explore-pan w-full min-h-screen bg-cover bg-no-repeat flex items-center"
         style="background-image: url('./images/bg2.JPG');"
     >
         <!-- FIX: responsive width and padding -->
         <div class="w-full md:w-3/5 px-6 md:px-12 py-16 text-white flex flex-col items-center text-center">
-            <h1 class="text-2xl md:text-4xl font-bold">EXPLORE THE WORLD</h1>
             <div class="w-36 h-1 bg-red-600 mx-auto my-3 rounded-full"></div>
             <p class="mt-4 text-base md:text-lg">"Happiness is found in the moments we share and the memories we create together."</p>
-            <a href="#" class="mt-8 bg-red-500 text-white px-6 py-2 rounded-full hover:bg-white hover:text-pink-500 transition-colors">
-                Learn More
-            </a>
         </div>
     </section>
 
@@ -160,73 +172,73 @@
             <div class="mirror-card border border-gray-200 rounded-xl p-4 text-center text-[#006080] flex flex-col items-center gap-3">
                 <h3 class="font-semibold text-sm md:text-base">"Focus on the good things"</h3>
                 <div class="w-full h-56 overflow-hidden rounded-lg">
-                    <img src="./images/img8.JPG" alt="Focus on the good things" class="w-full h-full object-cover md:hover:scale-110 transition-transform duration-300">
+                    <img src="./images/img8.JPG" alt="Focus on the good things" class="w-full h-full object-cover zoom-loop">
                 </div>
             </div>
             <div class="mirror-card border border-gray-200 rounded-xl p-4 text-center text-[#006080] flex flex-col items-center gap-3">
                 <h3 class="font-semibold text-sm md:text-base">"Choose joy, every day"</h3>
                 <div class="w-full h-56 overflow-hidden rounded-lg">
-                    <img src="./images/img10.JPG" alt="Choose joy every day" class="w-full h-full object-cover md:hover:scale-110 transition-transform duration-300">
+                    <img src="./images/img10.JPG" alt="Choose joy every day" class="w-full h-full object-cover zoom-loop">
                 </div>
             </div>
             <div class="mirror-card border border-gray-200 rounded-xl p-4 text-center text-[#006080] flex flex-col items-center gap-3">
                 <h3 class="font-semibold text-sm md:text-base">"Shine bright, even on tough days"</h3>
                 <div class="w-full h-56 overflow-hidden rounded-lg">
-                    <img src="./images/img11.JPG" alt="Shine bright" class="w-full h-full object-cover md:hover:scale-110 transition-transform duration-300">
+                    <img src="./images/img11.JPG" alt="Shine bright" class="w-full h-full object-cover zoom-loop">
                 </div>
             </div>
             <div class="mirror-card border border-gray-200 rounded-xl p-4 text-center text-[#006080] flex flex-col items-center gap-3">
                 <h3 class="font-semibold text-sm md:text-base">"Create your own sunshine"</h3>
                 <div class="w-full h-56 overflow-hidden rounded-lg">
-                    <img src="./images/img12.JPG" alt="Create your own sunshine" class="w-full h-full object-cover md:hover:scale-110 transition-transform duration-300">
+                    <img src="./images/img12.JPG" alt="Create your own sunshine" class="w-full h-full object-cover zoom-loop">
                 </div>
             </div>
             <div class="mirror-card border border-gray-200 rounded-xl p-4 text-center text-[#006080] flex flex-col items-center gap-3">
                 <h3 class="font-semibold text-sm md:text-base">"Embrace the journey"</h3>
                 <div class="w-full h-56 overflow-hidden rounded-lg">
-                    <img src="./images/img13.JPG" alt="Embrace the journey" class="w-full h-full object-cover md:hover:scale-110 transition-transform duration-300">
+                    <img src="./images/img13.JPG" alt="Embrace the journey" class="w-full h-full object-cover zoom-loop">
                 </div>
             </div>
             <div class="mirror-card border border-gray-200 rounded-xl p-4 text-center text-[#006080] flex flex-col items-center gap-3">
                 <h3 class="font-semibold text-sm md:text-base">"Believe in yourself"</h3>
                 <div class="w-full h-56 overflow-hidden rounded-lg">
-                    <img src="./images/img20.JPG" alt="Believe in yourself" class="w-full h-full object-cover md:hover:scale-110 transition-transform duration-300">
+                    <img src="./images/img20.JPG" alt="Believe in yourself" class="w-full h-full object-cover zoom-loop">
                 </div>
             </div>
             <div class="mirror-card border border-gray-200 rounded-xl p-4 text-center text-[#006080] flex flex-col items-center gap-3">
                 <h3 class="font-semibold text-sm md:text-base">"Good things take time"</h3>
                 <div class="w-full h-56 overflow-hidden rounded-lg">
-                    <img src="./images/img17.JPG" alt="Good things take time" class="w-full h-full object-cover md:hover:scale-110 transition-transform duration-300">
+                    <img src="./images/img17.JPG" alt="Good things take time" class="w-full h-full object-cover zoom-loop">
                 </div>
             </div>
             <div class="mirror-card border border-gray-200 rounded-xl p-4 text-center text-[#006080] flex flex-col items-center gap-3">
                 <h3 class="font-semibold text-sm md:text-base">"You've got this"</h3>
                 <div class="w-full h-56 overflow-hidden rounded-lg">
-                    <img src="./images/img23.JPG" alt="You've got this" class="w-full h-full object-cover md:hover:scale-110 transition-transform duration-300">
+                    <img src="./images/img23.JPG" alt="You've got this" class="w-full h-full object-cover zoom-loop">
                 </div>
             </div>
             <div class="mirror-card border border-gray-200 rounded-xl p-4 text-center text-[#006080] flex flex-col items-center gap-3">
                 <h3 class="font-semibold text-sm md:text-base">"Dream big, stay focused"</h3>
                 <div class="w-full h-56 overflow-hidden rounded-lg">
-                    <img src="./images/img24.jpg" alt="Dream big stay focused" class="w-full h-full object-cover md:hover:scale-110 transition-transform duration-300">
+                    <img src="./images/img24.jpg" alt="Dream big stay focused" class="w-full h-full object-cover zoom-loop">
                 </div>
             </div>
             <div class="mirror-card border border-gray-200 rounded-xl p-4 text-center text-[#006080] flex flex-col items-center gap-3">
                 <h3 class="font-semibold text-sm md:text-base">"You are stronger than you think"</h3>
                 <div class="w-full h-56 overflow-hidden rounded-lg">
-                    <img src="./images/img18.JPG" alt="You are stronger than you think" class="w-full h-full object-cover md:hover:scale-110 transition-transform duration-300">
+                    <img src="./images/img18.JPG" alt="You are stronger than you think" class="w-full h-full object-cover zoom-loop">
                 </div>
             </div>
             <div class="mirror-card border border-gray-200 rounded-xl p-4 text-center text-[#006080] flex flex-col items-center gap-3">
                 <h3 class="font-semibold text-sm md:text-base">"Friendship is the best kind of love"</h3>
                 <div class="w-full h-56 overflow-hidden rounded-lg">
-                    <img src="./images/img26.jpg" alt="Friendship is the best kind of love" class="w-full h-full object-cover md:hover:scale-110 transition-transform duration-300">
+                    <img src="./images/img26.jpg" alt="Friendship is the best kind of love" class="w-full h-full object-cover zoom-loop">
                 </div>
             </div>
             <div class="mirror-card border border-gray-200 rounded-xl p-4 text-center text-[#006080] flex flex-col items-center gap-3">
                 <h3 class="font-semibold text-sm md:text-base">"Life is better with friends by your side"</h3>
                 <div class="w-full h-56 overflow-hidden rounded-lg">
-                    <img src="./images/img25.jpg" alt="Life is better with friends" class="w-full h-full object-cover md:hover:scale-110 transition-transform duration-300">
+                    <img src="./images/img25.jpg" alt="Life is better with friends" class="w-full h-full object-cover zoom-loop">
                 </div>
             </div>
 
