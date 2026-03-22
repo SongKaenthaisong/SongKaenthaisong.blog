@@ -104,21 +104,31 @@
     <main class="w-11/12 md:w-3/5 lg:w-1/2 mx-auto my-16 space-y-12">
 
         <!-- Intro Card -->
-        <div class="fade-up bg-white rounded-2xl shadow-md p-8 flex flex-col items-center text-center gap-5">
-            <div class="avatar-ring">
-                <div class="w-28 h-28 rounded-full overflow-hidden bg-[#eef0ff] flex items-center justify-center">
-                    <img src="./images/img20.JPG" alt="Song" class="w-full h-full object-cover">
+        <div class="fade-up bg-white rounded-2xl shadow-md overflow-hidden">
+            <!-- Photo full width on mobile, side-by-side on md+ -->
+            <div class="flex flex-col md:flex-row">
+                <!-- Profile Photo -->
+                <div class="md:w-2/5 flex-shrink-0">
+                    <div class="avatar-ring m-0 rounded-none md:rounded-l-2xl h-72 md:h-full" style="padding:0;">
+                        <img src="./images/profile.jpg" alt="นราธิป แก่นไทยสงค์"
+                            class="w-full h-full object-cover object-top rounded-t-2xl md:rounded-t-none md:rounded-l-2xl">
+                    </div>
+                </div>
+                <!-- Text -->
+                <div class="md:w-3/5 p-8 flex flex-col justify-center gap-4">
+                    <div class="text-center md:text-left">
+                        <h2 class="text-2xl md:text-3xl font-bold text-[#49497e]">นราธิป แก่นไทยสงค์</h2>
+                        <p class="text-[#006080] font-medium mt-1">— "ส่ง" —</p>
+                        <div class="w-20 h-1 bg-red-500 mt-3 rounded-full mx-auto md:mx-0"></div>
+                    </div>
+                    <p class="text-gray-600 leading-relaxed text-base">
+                        สวัสดีครับ ผมชื่อ <span class="font-semibold text-[#49497e]">นราธิป แก่นไทยสงค์</span> หรือเรียกสั้นๆ ว่า <span class="font-semibold text-[#006080]">"ส่ง"</span> ก็ได้ครับ
+                    </p>
+                    <p class="text-gray-600 leading-relaxed text-base">
+                        วัยเด็กของผมไม่ได้โรยด้วยกลีบกุหลาบ แต่มันสอนให้ผมรู้จัก <span class="font-semibold">"สู้"</span> — สู้กับทุกสิ่งที่ขวางหน้า และเรียนรู้จากมันทุกครั้ง นั่นคงเป็นเหตุผลที่ทำให้ผมหลงรักการแก้ปัญหามาจนถึงทุกวันนี้
+                    </p>
                 </div>
             </div>
-            <div>
-                <h2 class="text-2xl md:text-3xl font-bold text-[#49497e]">นราธิป แก่นไทยสงค์</h2>
-                <p class="text-[#006080] font-medium mt-1">— "ส่ง" —</p>
-            </div>
-            <p class="text-gray-600 leading-relaxed text-base md:text-lg">
-                สวัสดีครับ ผมชื่อ <span class="font-semibold text-[#49497e]">นราธิป แก่นไทยสงค์</span> หรือเรียกสั้นๆ ว่า <span class="font-semibold text-[#006080]">"ส่ง"</span> ก็ได้ครับ
-                <br><br>
-                วัยเด็กของผมไม่ได้โรยด้วยกลีบกุหลาบ แต่มันสอนให้ผมรู้จัก <span class="font-semibold">"สู้"</span> — สู้กับทุกสิ่งที่ขวางหน้า และเรียนรู้จากมันทุกครั้ง นั่นคงเป็นเหตุผลที่ทำให้ผมหลงรักการแก้ปัญหามาจนถึงทุกวันนี้
-            </p>
         </div>
 
         <!-- Quote 1 -->
