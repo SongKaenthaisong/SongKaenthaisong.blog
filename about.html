@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About — Song Kaenthaisong Blog</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Sarabun', 'Poppins', sans-serif; }
+
+        @keyframes heroPan {
+            0%   { background-position: left center; }
+            50%  { background-position: right center; }
+            100% { background-position: left center; }
+        }
+        .hero-pan { animation: heroPan 18s ease-in-out infinite; }
+
+        /* Quote card */
+        .quote-card {
+            position: relative;
+            border-left: 4px solid #49497e;
+            background: linear-gradient(135deg, #f8f8ff 0%, #eef0ff 100%);
+        }
+        .quote-card::before {
+            content: '\201C';
+            position: absolute;
+            top: -10px;
+            left: 16px;
+            font-size: 5rem;
+            color: #49497e;
+            opacity: 0.15;
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+
+        /* Fade up */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Avatar ring */
+        .avatar-ring {
+            background: linear-gradient(135deg, #49497e, #006080, #abdbe3);
+            padding: 4px;
+            border-radius: 9999px;
+        }
+
+        /* Section divider */
+        .section-dot {
+            width: 10px; height: 10px;
+            background: #49497e;
+            border-radius: 9999px;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden bg-gray-50">
+
+    <!-- Navbar -->
+    <nav class="absolute top-0 left-0 w-full flex justify-between items-center px-6 py-5 z-20">
+        <ul class="hidden md:flex items-center gap-8 text-white">
+            <li class="hover:text-orange-400 transition-colors"><a href="index.html">Home</a></li>
+            <li class="hover:text-orange-400 transition-colors"><a href="gallery.html">Gallery</a></li>
+            <li class="hover:text-orange-400 transition-colors"><a href="#">Explore</a></li>
+            <li class="underline font-bold"><a href="about.html">About</a></li>
+            <li><a href="#" class="bg-[#abdbe3] text-white px-4 py-2 rounded-full hover:opacity-80 transition-opacity">Contact</a></li>
+        </ul>
+        <button id="menu-btn" class="md:hidden focus:outline-none" aria-label="Open menu">
+            <img src="./images/menu-btn.png" alt="menu" class="w-9">
+        </button>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="hidden fixed inset-0 bg-[#484870] z-30 flex-col items-center justify-center gap-8 text-white text-xl">
+        <button id="close-menu" class="absolute top-6 right-6 text-3xl text-white">&times;</button>
+        <a href="index.html" class="hover:text-orange-400 transition-colors">Home</a>
+        <a href="gallery.html" class="hover:text-orange-400 transition-colors">Gallery</a>
+        <a href="#" class="hover:text-orange-400 transition-colors">Explore</a>
+        <a href="about.html" class="underline font-bold hover:text-orange-400 transition-colors">About</a>
+        <a href="#" class="bg-[#abdbe3] px-6 py-2 rounded-full hover:opacity-80 transition-opacity">Contact</a>
+    </div>
+
+    <!-- Hero -->
+    <header
+        class="hero-pan w-full h-72 md:h-96 bg-cover flex items-center justify-center relative"
+        style="background-image: url('./images/bg2.JPG');"
+    >
+        <div class="absolute inset-0 bg-black/50"></div>
+        <div class="relative text-white text-center px-4">
+            <div class="w-36 h-1 bg-red-500 mx-auto mb-4 rounded-full"></div>
+            <h1 class="text-4xl md:text-6xl font-bold tracking-wide">About Me</h1>
+            <p class="mt-3 text-base md:text-lg text-gray-200">"นราธิป แก่นไทยสงค์ — ส่ง"</p>
+        </div>
+    </header>
+
+    <!-- Content -->
+    <main class="w-11/12 md:w-3/5 lg:w-1/2 mx-auto my-16 space-y-12">
+
+        <!-- Intro Card -->
+        <div class="fade-up bg-white rounded-2xl shadow-md p-8 flex flex-col items-center text-center gap-5">
+            <div class="avatar-ring">
+                <div class="w-28 h-28 rounded-full overflow-hidden bg-[#eef0ff] flex items-center justify-center">
+                    <img src="./images/img20.JPG" alt="Song" class="w-full h-full object-cover">
+                </div>
+            </div>
+            <div>
+                <h2 class="text-2xl md:text-3xl font-bold text-[#49497e]">นราธิป แก่นไทยสงค์</h2>
+                <p class="text-[#006080] font-medium mt-1">— "ส่ง" —</p>
+            </div>
+            <p class="text-gray-600 leading-relaxed text-base md:text-lg">
+                สวัสดีครับ ผมชื่อ <span class="font-semibold text-[#49497e]">นราธิป แก่นไทยสงค์</span> หรือเรียกสั้นๆ ว่า <span class="font-semibold text-[#006080]">"ส่ง"</span> ก็ได้ครับ
+                <br><br>
+                วัยเด็กของผมไม่ได้โรยด้วยกลีบกุหลาบ แต่มันสอนให้ผมรู้จัก <span class="font-semibold">"สู้"</span> — สู้กับทุกสิ่งที่ขวางหน้า และเรียนรู้จากมันทุกครั้ง นั่นคงเป็นเหตุผลที่ทำให้ผมหลงรักการแก้ปัญหามาจนถึงทุกวันนี้
+            </p>
+        </div>
+
+        <!-- Quote 1 -->
+        <div class="fade-up quote-card rounded-xl p-6 pl-8 shadow-sm">
+            <p class="text-[#49497e] text-base md:text-lg italic leading-relaxed font-medium">
+                "You have power over your mind, not outside events. Realize this, and you will find strength."
+            </p>
+            <p class="mt-3 text-sm text-gray-500 font-semibold">— Marcus Aurelius</p>
+        </div>
+
+        <!-- Paragraph 2 -->
+        <div class="fade-up bg-white rounded-2xl shadow-md p-8">
+            <p class="text-gray-600 leading-relaxed text-base md:text-lg">
+                ประโยคนี้เหมือนถูกเขียนมาเพื่อผมโดยตรง เพราะชีวิตสอนผมมาตลอดว่า <span class="font-semibold text-[#49497e]">สิ่งที่เราควบคุมได้มีเพียงตัวเอง</span> — ทัศนคติ การกระทำ และทางเลือกของเรา ส่วนที่เหลือ... ปล่อยให้มันเป็นไปครับ
+            </p>
+            <div class="mt-6 pt-6 border-t border-gray-100 flex flex-col sm:flex-row gap-4">
+                <div class="flex items-start gap-3">
+                    <div class="mt-1 w-3 h-3 rounded-full bg-[#006080] flex-shrink-0"></div>
+                    <p class="text-gray-600 text-sm md:text-base">ปัจจุบันผมทำงานสาย <span class="font-semibold text-[#49497e]">Engineering / Managing Electronics</span></p>
+                </div>
+                <div class="flex items-start gap-3">
+                    <div class="mt-1 w-3 h-3 rounded-full bg-[#abdbe3] flex-shrink-0"></div>
+                    <p class="text-gray-600 text-sm md:text-base">หลงใหลใน <span class="font-semibold text-[#49497e]">AI</span> และเทคโนโลยีที่กำลังเปลี่ยนแปลงโลก 😄</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quote 2 -->
+        <div class="fade-up quote-card rounded-xl p-6 pl-8 shadow-sm">
+            <p class="text-[#49497e] text-base md:text-lg italic leading-relaxed font-medium">
+                "Waste no more time arguing about what a good man should be. Be one."
+            </p>
+            <p class="mt-3 text-sm text-gray-500 font-semibold">— Marcus Aurelius</p>
+        </div>
+
+        <!-- Paragraph 3 -->
+        <div class="fade-up bg-white rounded-2xl shadow-md p-8">
+            <p class="text-gray-600 leading-relaxed text-base md:text-lg">
+                ปกติผมไม่ใช่คนชอบพูดมาก แต่เชื่อในการ<span class="font-semibold text-[#49497e]">ลงมือทำ</span> สุขุม เงียบๆ แต่ขับเคลื่อนด้วยเป้าหมายที่ชัดเจนเสมอ
+            </p>
+            <div class="mt-6 pt-6 border-t border-gray-100 text-center">
+                <p class="text-gray-500 text-sm mb-3 uppercase tracking-widest font-medium">สิ่งสำคัญที่สุดในชีวิต</p>
+                <div class="flex justify-center gap-6">
+                    <div class="flex flex-col items-center gap-2">
+                        <span class="text-3xl">👨‍👧</span>
+                        <span class="text-[#49497e] font-semibold text-sm">ลูก</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <span class="text-3xl">💑</span>
+                        <span class="text-[#49497e] font-semibold text-sm">ภรรยา</span>
+                    </div>
+                    <div class="flex flex-col items-center gap-2">
+                        <span class="text-3xl">🏠</span>
+                        <span class="text-[#49497e] font-semibold text-sm">ครอบครัว</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quote 3 -->
+        <div class="fade-up quote-card rounded-xl p-6 pl-8 shadow-sm">
+            <p class="text-[#49497e] text-base md:text-lg italic leading-relaxed font-medium">
+                "He is a wise man who does not grieve for the things which he has not, but rejoices for those which he has."
+            </p>
+            <p class="mt-3 text-sm text-gray-500 font-semibold">— Epictetus</p>
+        </div>
+
+        <!-- Closing -->
+        <div class="fade-up bg-gradient-to-br from-[#49497e] to-[#006080] rounded-2xl shadow-lg p-8 text-white text-center">
+            <p class="leading-relaxed text-base md:text-lg">
+                ทุกเช้าที่ตื่นขึ้นมา ผมไม่ได้มองหาสิ่งที่ยังขาด แต่ผมรู้สึก<span class="font-semibold"> ขอบคุณ</span>กับสิ่งที่มีอยู่ตรงหน้า รอยยิ้มของคนที่รัก คือพลังงานที่ดีที่สุดในชีวิต
+            </p>
+            <p class="mt-6 text-xl font-semibold">นี่คือผม — 🙂</p>
+        </div>
+
+        <!-- Back to Home -->
+        <div class="text-center pb-4 fade-up">
+            <a href="index.html" class="inline-block bg-[#49497e] text-white px-8 py-3 rounded-full hover:bg-[#006080] transition-colors duration-300 font-medium">
+                &larr; Back to Home
+            </a>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full py-8 px-4 md:px-10 bg-[#006080] text-center">
+        <p class="text-white my-3">"The greatest joys in life are found in the simple moments spent with loved ones."</p>
+        <p class="text-gray-200 my-3 text-sm">Copyright &copy; 2024 Outdoor Adventure &mdash; Created by Song Kaenthaisong</p>
+    </footer>
+
+    <script>
+        // Mobile menu
+        const menuBtn = document.getElementById('menu-btn')
+        const mobileMenu = document.getElementById('mobile-menu')
+        const closeMenu = document.getElementById('close-menu')
+
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('hidden')
+            mobileMenu.classList.add('flex')
+        })
+        closeMenu.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden')
+            mobileMenu.classList.remove('flex')
+        })
+
+        // Fade-up on scroll
+        const fadeEls = document.querySelectorAll('.fade-up')
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, i) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => entry.target.classList.add('visible'), i * 100)
+                    observer.unobserve(entry.target)
+                }
+            })
+        }, { threshold: 0.1 })
+        fadeEls.forEach(el => observer.observe(el))
+    </script>
+</body>
+</html>
