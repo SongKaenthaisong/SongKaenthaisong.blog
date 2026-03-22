@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore — Song Kaenthaisong Blog</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Sarabun', 'Poppins', sans-serif; }
+
+        @keyframes heroPan {
+            0%   { background-position: left center; }
+            50%  { background-position: right center; }
+            100% { background-position: left center; }
+        }
+        .hero-pan { animation: heroPan 18s ease-in-out infinite; }
+
+        /* Article card hover */
+        .article-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .article-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        /* Tag badge */
+        .tag {
+            display: inline-block;
+            padding: 2px 12px;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.03em;
+        }
+
+        /* Timeline dot */
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -9px;
+            top: 6px;
+            width: 16px;
+            height: 16px;
+            border-radius: 9999px;
+            background: #49497e;
+            border: 3px solid #fff;
+            box-shadow: 0 0 0 2px #49497e;
+        }
+
+        /* Fade up */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(135deg, #49497e, #006080);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Progress bar */
+        .progress-bar {
+            height: 8px;
+            border-radius: 9999px;
+            background: linear-gradient(90deg, #49497e, #abdbe3);
+            transition: width 1.2s ease;
+            width: 0%;
+        }
+    </style>
+</head>
+<body class="overflow-x-hidden bg-gray-50">
+
+    <!-- Navbar -->
+    <nav class="absolute top-0 left-0 w-full flex justify-between items-center px-6 py-5 z-20">
+        <ul class="hidden md:flex items-center gap-8 text-white">
+            <li class="hover:text-orange-400 transition-colors"><a href="index.html">Home</a></li>
+            <li class="hover:text-orange-400 transition-colors"><a href="gallery.html">Gallery</a></li>
+            <li class="underline font-bold"><a href="explore.html">Explore</a></li>
+            <li class="hover:text-orange-400 transition-colors"><a href="about.html">About</a></li>
+            <li><a href="#" class="bg-[#abdbe3] text-white px-4 py-2 rounded-full hover:opacity-80 transition-opacity">Contact</a></li>
+        </ul>
+        <button id="menu-btn" class="md:hidden focus:outline-none" aria-label="Open menu">
+            <img src="./images/menu-btn.png" alt="menu" class="w-9">
+        </button>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden fixed inset-0 bg-[#484870] z-30 flex-col items-center justify-center gap-8 text-white text-xl">
+        <button id="close-menu" class="absolute top-6 right-6 text-3xl text-white">&times;</button>
+        <a href="index.html" class="hover:text-orange-400 transition-colors">Home</a>
+        <a href="gallery.html" class="hover:text-orange-400 transition-colors">Gallery</a>
+        <a href="explore.html" class="underline font-bold hover:text-orange-400 transition-colors">Explore</a>
+        <a href="about.html" class="hover:text-orange-400 transition-colors">About</a>
+        <a href="#" class="bg-[#abdbe3] px-6 py-2 rounded-full hover:opacity-80 transition-opacity">Contact</a>
+    </div>
+
+    <!-- Hero -->
+    <header
+        class="hero-pan w-full h-72 md:h-[420px] bg-cover flex items-center justify-center relative"
+        style="background-image: url('./images/bg1.JPG');"
+    >
+        <div class="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/20"></div>
+        <div class="relative text-white text-center px-4">
+            <span class="tag bg-[#abdbe3]/80 text-white mb-4 inline-block">Technology &amp; Future</span>
+            <h1 class="text-4xl md:text-6xl font-bold tracking-wide mt-2">Explore</h1>
+            <p class="mt-3 text-base md:text-xl text-gray-200 max-w-xl mx-auto">
+                "AI กำลังเปลี่ยนโลก — และ 4-5 ปีข้างหน้า จะไม่เหมือนเดิมอีกต่อไป"
+            </p>
+        </div>
+    </header>
+
+    <!-- Intro -->
+    <section class="w-11/12 md:w-4/5 mx-auto mt-14 mb-4 fade-up">
+        <div class="bg-gradient-to-r from-[#49497e] to-[#006080] rounded-2xl p-8 text-white text-center shadow-lg">
+            <p class="text-lg md:text-xl leading-relaxed max-w-3xl mx-auto">
+                ในยุคที่ AI กลายเป็นส่วนหนึ่งของชีวิตประจำวัน ผมรวบรวมบทความและมุมมองที่น่าสนใจเกี่ยวกับ
+                <span class="font-bold">อนาคตของเทคโนโลยี</span> ไว้ที่นี่ — เพราะโลกกำลังเปลี่ยนเร็วกว่าที่เราคิด
+            </p>
+        </div>
+    </section>
+
+    <!-- Main Articles -->
+    <section class="w-11/12 md:w-4/5 mx-auto my-12 space-y-8">
+
+        <!-- Article 1 — AGI -->
+        <article class="article-card fade-up bg-white rounded-2xl shadow-md overflow-hidden">
+            <div class="flex flex-col md:flex-row">
+                <div class="md:w-2/5 bg-gradient-to-br from-[#49497e] to-[#2d2d5e] flex items-center justify-center p-10 min-h-48">
+                    <div class="text-center text-white">
+                        <div class="text-7xl mb-3">🧠</div>
+                        <span class="tag bg-white/20 text-white">AGI</span>
+                    </div>
+                </div>
+                <div class="md:w-3/5 p-8">
+                    <div class="flex gap-2 mb-3 flex-wrap">
+                        <span class="tag bg-purple-100 text-purple-700">AI</span>
+                        <span class="tag bg-blue-100 text-blue-700">2026–2028</span>
+                    </div>
+                    <h2 class="text-xl md:text-2xl font-bold text-[#49497e] mb-3">
+                        AGI ใกล้กว่าที่คิด — ปัญญาประดิษฐ์ทั่วไปมาถึงแล้วหรือยัง?
+                    </h2>
+                    <p class="text-gray-600 leading-relaxed text-sm md:text-base">
+                        ในช่วงปี 2025–2028 บริษัทชั้นนำอย่าง OpenAI, Google DeepMind และ Anthropic
+                        ต่างเร่งพัฒนา <strong>AGI (Artificial General Intelligence)</strong> — AI ที่สามารถคิด
+                        วิเคราะห์ และแก้ปัญหาได้เทียบเท่าหรือเหนือกว่ามนุษย์ในทุกด้าน
+                    </p>
+                    <p class="text-gray-600 leading-relaxed text-sm md:text-base mt-3">
+                        Sam Altman ผู้บริหาร OpenAI ระบุว่า <em>"เราอาจเห็น AGI ภายในไม่กี่ปีข้างหน้านี้"</em>
+                        ซึ่งหมายความว่า AI จะไม่ใช่แค่ผู้ช่วยตอบคำถาม แต่จะเป็น <strong>หุ้นส่วนทางปัญญา</strong>
+                        ที่แก้ปัญหาโลกที่ซับซ้อนได้จริง ตั้งแต่โรคมะเร็งไปจนถึงวิกฤตโลกร้อน
+                    </p>
+                    <div class="mt-5 pt-5 border-t border-gray-100">
+                        <p class="text-xs text-gray-400 font-medium uppercase tracking-wider mb-2">ความคืบหน้าการพัฒนา</p>
+                        <div class="bg-gray-100 rounded-full overflow-hidden">
+                            <div class="progress-bar" data-width="72"></div>
+                        </div>
+                        <p class="text-xs text-gray-400 mt-1">ประมาณการ 72% เทียบเป้าหมาย AGI</p>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- Article 2 — AI Agents -->
+        <article class="article-card fade-up bg-white rounded-2xl shadow-md overflow-hidden">
+            <div class="flex flex-col md:flex-row-reverse">
+                <div class="md:w-2/5 bg-gradient-to-br from-[#006080] to-[#004d66] flex items-center justify-center p-10 min-h-48">
+                    <div class="text-center text-white">
+                        <div class="text-7xl mb-3">🤖</div>
+                        <span class="tag bg-white/20 text-white">AI Agents</span>
+                    </div>
+                </div>
+                <div class="md:w-3/5 p-8">
+                    <div class="flex gap-2 mb-3 flex-wrap">
+                        <span class="tag bg-teal-100 text-teal-700">Automation</span>
+                        <span class="tag bg-blue-100 text-blue-700">2025–2027</span>
+                    </div>
+                    <h2 class="text-xl md:text-2xl font-bold text-[#49497e] mb-3">
+                        AI Agents — เพื่อนร่วมงานที่ทำงานแทนคุณได้ 24 ชั่วโมง
+                    </h2>
+                    <p class="text-gray-600 leading-relaxed text-sm md:text-base">
+                        ปี 2025 เป็นจุดเริ่มต้นของ <strong>AI Agent</strong> อย่างแท้จริง — AI ที่ไม่ได้แค่ตอบคำถาม
+                        แต่สามารถ<strong>วางแผน ดำเนินงาน และตัดสินใจ</strong>ได้เองเป็นลำดับขั้น
+                        เช่น จองเที่ยวบิน เขียนโค้ด วิเคราะห์ข้อมูล และส่งรายงานได้ครบในคำสั่งเดียว
+                    </p>
+                    <p class="text-gray-600 leading-relaxed text-sm md:text-base mt-3">
+                        Microsoft Copilot, Google Gemini Ultra และ Claude ของ Anthropic
+                        กำลังพัฒนา Agent ที่สามารถควบคุมคอมพิวเตอร์ได้เองทั้งหมด
+                        นักวิเคราะห์คาดว่าภายในปี 2027 องค์กรกว่า <strong>60%</strong> จะมี AI Agent ทำงานร่วมในทีม
+                    </p>
+                    <div class="mt-5 grid grid-cols-3 gap-3 pt-5 border-t border-gray-100">
+                        <div class="text-center">
+                            <p class="text-2xl font-bold text-[#49497e]">60%</p>
+                            <p class="text-xs text-gray-400">องค์กรใช้ AI Agent ปี 2027</p>
+                        </div>
+                        <div class="text-center">
+                            <p class="text-2xl font-bold text-[#006080]">10x</p>
+                            <p class="text-xs text-gray-400">ความเร็วในการทำงาน</p>
+                        </div>
+                        <div class="text-center">
+                            <p class="text-2xl font-bold text-[#abdbe3]">24/7</p>
+                            <p class="text-xs text-gray-400">ทำงานไม่มีหยุด</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- Article 3 — AI in Healthcare -->
+        <article class="article-card fade-up bg-white rounded-2xl shadow-md overflow-hidden">
+            <div class="flex flex-col md:flex-row">
+                <div class="md:w-2/5 bg-gradient-to-br from-[#c0392b] to-[#922b21] flex items-center justify-center p-10 min-h-48">
+                    <div class="text-center text-white">
+                        <div class="text-7xl mb-3">🏥</div>
+                        <span class="tag bg-white/20 text-white">Healthcare</span>
+                    </div>
+                </div>
+                <div class="md:w-3/5 p-8">
+                    <div class="flex gap-2 mb-3 flex-wrap">
+                        <span class="tag bg-red-100 text-red-700">Medical AI</span>
+                        <span class="tag bg-blue-100 text-blue-700">2025–2029</span>
+                    </div>
+                    <h2 class="text-xl md:text-2xl font-bold text-[#49497e] mb-3">
+                        AI เปลี่ยนวงการแพทย์ — วินิจฉัยโรคได้เร็วกว่าหมอ
+                    </h2>
+                    <p class="text-gray-600 leading-relaxed text-sm md:text-base">
+                        Google DeepMind พัฒนา <strong>AlphaFold</strong> ที่สามารถทำนายโครงสร้างโปรตีนได้แม่นยำ 99%
+                        เปิดทางให้นักวิทยาศาสตร์ค้นพบยารักษาโรคใหม่ในเวลาเดือน แทนที่จะเป็นทศวรรษ
+                    </p>
+                    <p class="text-gray-600 leading-relaxed text-sm md:text-base mt-3">
+                        ภายในปี 2029 คาดว่า AI จะสามารถ<strong>ตรวจคัดกรองมะเร็ง</strong>จากภาพ X-Ray และ MRI
+                        ได้แม่นยำกว่าแพทย์ผู้เชี่ยวชาญ รวมถึงการออกแบบยาเฉพาะบุคคล (Personalized Medicine)
+                        ตามรหัสพันธุกรรมของผู้ป่วยแต่ละคน
+                    </p>
+                    <div class="mt-5 pt-5 border-t border-gray-100 flex gap-4 flex-wrap">
+                        <div class="flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-red-400"></div>
+                            <span class="text-xs text-gray-500">วินิจฉัยแม่นยำ 99%</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-orange-400"></div>
+                            <span class="text-xs text-gray-500">ค้นพบยาเร็ว 100x</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-yellow-400"></div>
+                            <span class="text-xs text-gray-500">ยาเฉพาะบุคคล</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- Article 4 — AI in Manufacturing -->
+        <article class="article-card fade-up bg-white rounded-2xl shadow-md overflow-hidden">
+            <div class="flex flex-col md:flex-row-reverse">
+                <div class="md:w-2/5 bg-gradient-to-br from-[#d68910] to-[#9a6403] flex items-center justify-center p-10 min-h-48">
+                    <div class="text-center text-white">
+                        <div class="text-7xl mb-3">🏭</div>
+                        <span class="tag bg-white/20 text-white">Industry 5.0</span>
+                    </div>
+                </div>
+                <div class="md:w-3/5 p-8">
+                    <div class="flex gap-2 mb-3 flex-wrap">
+                        <span class="tag bg-yellow-100 text-yellow-700">Manufacturing</span>
+                        <span class="tag bg-blue-100 text-blue-700">2026–2030</span>
+                    </div>
+                    <h2 class="text-xl md:text-2xl font-bold text-[#49497e] mb-3">
+                        Industry 5.0 — โรงงานอัจฉริยะที่ AI ควบคุมทุกอย่าง
+                    </h2>
+                    <p class="text-gray-600 leading-relaxed text-sm md:text-base">
+                        หลังจาก Industry 4.0 ที่ใช้ IoT และ Automation <strong>Industry 5.0</strong>
+                        จะเน้นการทำงานร่วมกันระหว่าง <strong>มนุษย์กับหุ่นยนต์อัจฉริยะ</strong>
+                        ที่ขับเคลื่อนด้วย AI แบบ Real-time
+                    </p>
+                    <p class="text-gray-600 leading-relaxed text-sm md:text-base mt-3">
+                        ในสาย Engineering อย่างผม นี่คือการเปลี่ยนแปลงครั้งใหญ่ที่สุดในรอบ 50 ปี
+                        AI จะวิเคราะห์ข้อบกพร่องในไลน์การผลิต ทำนายการเสียของเครื่องจักรล่วงหน้า
+                        และปรับกระบวนการผลิตได้เองโดยอัตโนมัติ ลด Downtime ได้กว่า <strong>40%</strong>
+                    </p>
+                    <div class="mt-5 pt-5 border-t border-gray-100">
+                        <p class="text-xs text-gray-400 font-medium uppercase tracking-wider mb-2">การลด Downtime ด้วย AI</p>
+                        <div class="bg-gray-100 rounded-full overflow-hidden">
+                            <div class="progress-bar" data-width="85" style="background: linear-gradient(90deg, #d68910, #f39c12);"></div>
+                        </div>
+                        <p class="text-xs text-gray-400 mt-1">ประสิทธิภาพสูงขึ้นถึง 85% ในโรงงานที่ใช้ AI</p>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <!-- Article 5 — Humanoid Robots -->
+        <article class="article-card fade-up bg-white rounded-2xl shadow-md overflow-hidden">
+            <div class="flex flex-col md:flex-row">
+                <div class="md:w-2/5 bg-gradient-to-br from-[#1a5276] to-[#154360] flex items-center justify-center p-10 min-h-48">
+                    <div class="text-center text-white">
+                        <div class="text-7xl mb-3">🦾</div>
+                        <span class="tag bg-white/20 text-white">Humanoid</span>
+                    </div>
+                </div>
+                <div class="md:w-3/5 p-8">
+                    <div class="flex gap-2 mb-3 flex-wrap">
+                        <span class="tag bg-indigo-100 text-indigo-700">Robotics</span>
+                        <span class="tag bg-blue-100 text-blue-700">2027–2030</span>
+                    </div>
+                    <h2 class="text-xl md:text-2xl font-bold text-[#49497e] mb-3">
+                        หุ่นยนต์เดินได้เหมือนมนุษย์ — Tesla Optimus และอนาคตที่ใกล้มา
+                    </h2>
+                    <p class="text-gray-600 leading-relaxed text-sm md:text-base">
+                        Tesla เริ่มผลิต <strong>Optimus</strong> หุ่นยนต์ Humanoid ที่ใช้ AI ทำงานในโรงงาน
+                        ขณะที่ Boston Dynamics, Figure AI และ 1X Technologies ก็แข่งกันพัฒนา
+                        หุ่นยนต์ที่จะทำงานแทนมนุษย์ในงานอันตรายหรืองานซ้ำซาก
+                    </p>
+                    <p class="text-gray-600 leading-relaxed text-sm md:text-base mt-3">
+                        Elon Musk ทำนายว่าภายในปี 2030 โลกจะมีหุ่นยนต์ Humanoid มากกว่า
+                        <strong>1,000 ล้านตัว</strong> ซึ่งจะเปลี่ยนโครงสร้างแรงงานโลกอย่างสิ้นเชิง
+                        และสร้างงานใหม่ที่ยังไม่มีอยู่ในวันนี้
+                    </p>
+                    <div class="mt-5 grid grid-cols-2 gap-3 pt-5 border-t border-gray-100">
+                        <div class="bg-indigo-50 rounded-xl p-3 text-center">
+                            <p class="text-xl font-bold text-[#49497e]">1B+</p>
+                            <p class="text-xs text-gray-400">หุ่นยนต์ภายในปี 2030</p>
+                        </div>
+                        <div class="bg-blue-50 rounded-xl p-3 text-center">
+                            <p class="text-xl font-bold text-[#006080]">$20K</p>
+                            <p class="text-xs text-gray-400">ราคาเป้าหมาย Optimus</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+    </section>
+
+    <!-- Timeline Section -->
+    <section class="w-11/12 md:w-4/5 mx-auto my-16 fade-up">
+        <div class="text-center mb-10">
+            <h2 class="text-2xl md:text-3xl font-bold gradient-text">Timeline อนาคต AI 2025–2030</h2>
+            <div class="w-36 h-1 bg-red-500 mx-auto mt-3 rounded-full"></div>
+        </div>
+
+        <div class="relative border-l-2 border-[#49497e] ml-4 space-y-8 pl-8">
+
+            <div class="timeline-item relative fade-up">
+                <span class="tag bg-purple-100 text-purple-700 mb-2 inline-block">2025</span>
+                <h3 class="font-bold text-[#49497e] text-lg">AI Agents เริ่มทำงานจริงในองค์กร</h3>
+                <p class="text-gray-500 text-sm mt-1">AI ควบคุมคอมพิวเตอร์ได้เอง ทำงานแทนพนักงานในงาน Routine เริ่มเห็นในบริษัทเทคโนโลยีชั้นนำ</p>
+            </div>
+
+            <div class="timeline-item relative fade-up">
+                <span class="tag bg-blue-100 text-blue-700 mb-2 inline-block">2026</span>
+                <h3 class="font-bold text-[#49497e] text-lg">Model AI แรก ที่อ้างว่าบรรลุ AGI</h3>
+                <p class="text-gray-500 text-sm mt-1">อาจมีการประกาศ AGI ครั้งแรก แม้ยังเป็นที่ถกเถียง แต่จะสร้างคลื่นความเปลี่ยนแปลงครั้งใหญ่</p>
+            </div>
+
+            <div class="timeline-item relative fade-up">
+                <span class="tag bg-teal-100 text-teal-700 mb-2 inline-block">2027</span>
+                <h3 class="font-bold text-[#49497e] text-lg">AI วินิจฉัยโรคแม่นยำเทียบเท่าแพทย์ผู้เชี่ยวชาญ</h3>
+                <p class="text-gray-500 text-sm mt-1">ระบบ AI ด้านการแพทย์ได้รับการรับรองจากองค์กรสาธารณสุขทั่วโลก เริ่มใช้จริงในโรงพยาบาล</p>
+            </div>
+
+            <div class="timeline-item relative fade-up">
+                <span class="tag bg-orange-100 text-orange-700 mb-2 inline-block">2028</span>
+                <h3 class="font-bold text-[#49497e] text-lg">Humanoid Robot เข้าสู่ตลาดผู้บริโภค</h3>
+                <p class="text-gray-500 text-sm mt-1">หุ่นยนต์ Humanoid ราคาจับต้องได้เริ่มวางขาย ใช้ในบ้านและธุรกิจขนาดเล็ก</p>
+            </div>
+
+            <div class="timeline-item relative fade-up">
+                <span class="tag bg-red-100 text-red-700 mb-2 inline-block">2029–2030</span>
+                <h3 class="font-bold text-[#49497e] text-lg">โลกเข้าสู่ยุค Post-AGI</h3>
+                <p class="text-gray-500 text-sm mt-1">AI แก้ปัญหาโลกที่ซับซ้อนได้จริง ตั้งแต่โรคอันตราย พลังงานสะอาด ไปจนถึงการเปลี่ยนแปลงสภาพภูมิอากาศ</p>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Personal Take -->
+    <section class="w-11/12 md:w-4/5 mx-auto my-16 fade-up">
+        <div class="bg-gradient-to-br from-[#49497e] to-[#006080] rounded-2xl p-8 md:p-12 text-white">
+            <div class="flex items-center gap-3 mb-6">
+                <div class="w-12 h-12 rounded-full overflow-hidden flex-shrink-0 border-2 border-white/40">
+                    <img src="./images/profile.jpg" alt="Song" class="w-full h-full object-cover object-top">
+                </div>
+                <div>
+                    <p class="font-bold">นราธิป แก่นไทยสงค์</p>
+                    <p class="text-sm text-white/70">Engineering / AI Enthusiast</p>
+                </div>
+            </div>
+            <h3 class="text-xl md:text-2xl font-bold mb-4">มุมมองของผม</h3>
+            <p class="leading-relaxed text-white/90 text-base md:text-lg mb-4">
+                ในฐานะคนที่ทำงานสาย Engineering ผมมองว่า AI ไม่ใช่ภัยคุกคาม — แต่เป็น
+                <strong>เครื่องมือที่ทรงพลังที่สุดที่มนุษย์เคยสร้างขึ้น</strong>
+                คนที่จะรุ่งในอีก 5 ปีข้างหน้า ไม่ใช่คนที่กลัว AI แต่คือคนที่รู้จัก<strong>ทำงานร่วมกับ AI</strong>
+            </p>
+            <p class="leading-relaxed text-white/90 text-base md:text-lg">
+                สิ่งที่ AI ทำไม่ได้คือ <strong>ความเป็นมนุษย์</strong> — ความเห็นอกเห็นใจ ความคิดสร้างสรรค์ที่แท้จริง
+                และการตัดสินใจด้วยคุณค่าและจริยธรรม นั่นคือสิ่งที่เราต้องพัฒนาควบคู่ไปด้วย
+            </p>
+        </div>
+    </section>
+
+    <!-- Back to Home -->
+    <div class="text-center mb-16 fade-up">
+        <a href="index.html" class="inline-block bg-[#49497e] text-white px-8 py-3 rounded-full hover:bg-[#006080] transition-colors duration-300 font-medium">
+            &larr; Back to Home
+        </a>
+    </div>
+
+    <!-- Footer -->
+    <footer class="w-full py-8 px-4 md:px-10 bg-[#006080] text-center">
+        <p class="text-white my-3">"The greatest joys in life are found in the simple moments spent with loved ones."</p>
+        <p class="text-gray-200 my-3 text-sm">Copyright &copy; 2024 Outdoor Adventure &mdash; Created by Song Kaenthaisong</p>
+    </footer>
+
+    <script>
+        // Mobile menu
+        const menuBtn = document.getElementById('menu-btn')
+        const mobileMenu = document.getElementById('mobile-menu')
+        const closeMenu = document.getElementById('close-menu')
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('hidden')
+            mobileMenu.classList.add('flex')
+        })
+        closeMenu.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden')
+            mobileMenu.classList.remove('flex')
+        })
+
+        // Fade-up on scroll
+        const fadeEls = document.querySelectorAll('.fade-up')
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, i) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => entry.target.classList.add('visible'), i * 80)
+                    observer.unobserve(entry.target)
+                }
+            })
+        }, { threshold: 0.08 })
+        fadeEls.forEach(el => observer.observe(el))
+
+        // Animate progress bars when visible
+        const bars = document.querySelectorAll('.progress-bar')
+        const barObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.width = entry.target.dataset.width + '%'
+                    barObserver.unobserve(entry.target)
+                }
+            })
+        }, { threshold: 0.5 })
+        bars.forEach(bar => barObserver.observe(bar))
+    </script>
+</body>
+</html>
