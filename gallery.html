@@ -97,6 +97,14 @@
             transform: translateY(0);
         }
     </style>
+    <!-- Google Analytics 4 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX');
+    </script>
 </head>
 <body class="overflow-x-hidden bg-gray-50">
 
@@ -213,6 +221,10 @@
     <!-- Footer -->
     <footer class="w-full py-8 px-4 md:px-10 bg-[#006080] text-center">
         <p class="text-white my-3">"The greatest joys in life are found in the simple moments spent with loved ones."</p>
+        <div class="mt-4 flex items-center justify-center gap-2">
+            <span class="text-gray-300 text-xs uppercase tracking-wider">Visitors</span>
+            <img src="https://visitor-badge.laobi.icu/badge?page_id=SongKaenthaisong.blog" alt="visitors" class="h-5 rounded">
+        </div>
         <p class="text-gray-200 my-3 text-sm">Copyright &copy; 2024 Outdoor Adventure &mdash; Created by Song Kaenthaisong</p>
     </footer>
 
