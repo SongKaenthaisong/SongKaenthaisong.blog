@@ -1,103 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gallery — Song Kaenthaisong Blog</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Poppins', sans-serif; }
-
-        /* Hero pan animation */
-        @keyframes heroPan {
-            0%   { background-position: left bottom; }
-            50%  { background-position: right bottom; }
-            100% { background-position: left bottom; }
-        }
-        .hero-pan {
-            animation: heroPan 18s ease-in-out infinite;
-        }
-
-        /* Gallery card hover */
-        .gallery-card {
-            overflow: hidden;
-            border-radius: 1rem;
-            cursor: pointer;
-            position: relative;
-        }
-        .gallery-card img {
-            transition: transform 0.5s ease;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-        .gallery-card:hover img {
-            transform: scale(1.08);
-        }
-        .gallery-card .overlay {
-            position: absolute;
-            inset: 0;
-            background: rgba(0, 0, 0, 0);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.3s ease;
-        }
-        .gallery-card:hover .overlay {
-            background: rgba(0, 0, 0, 0.35);
-        }
-        .gallery-card .overlay-icon {
-            opacity: 0;
-            transform: scale(0.7);
-            transition: opacity 0.3s ease, transform 0.3s ease;
-            color: white;
-            font-size: 2.5rem;
-        }
-        .gallery-card:hover .overlay-icon {
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        /* Lightbox */
-        #lightbox {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.88);
-            z-index: 100;
-            align-items: center;
-            justify-content: center;
-        }
-        #lightbox.active {
-            display: flex;
-        }
-        #lightbox img {
-            max-width: 90vw;
-            max-height: 85vh;
-            border-radius: 0.75rem;
-            box-shadow: 0 30px 80px rgba(0,0,0,0.6);
-            object-fit: contain;
-            animation: fadeInScale 0.25s ease;
-        }
-        @keyframes fadeInScale {
-            from { opacity: 0; transform: scale(0.92); }
-            to   { opacity: 1; transform: scale(1); }
-        }
-
-        /* Fade-in on scroll */
-        .fade-up {
-            opacity: 0;
-            transform: translateY(28px);
-            transition: opacity 0.55s ease, transform 0.55s ease;
-        }
-        .fade-up.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    </style>
-    <!-- Google Analytics 4 -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Sarabun:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -108,37 +16,58 @@
     <style id="navbar-style">
         #navbar .navbar-inner { background: transparent; }
         #navbar.scrolled .navbar-inner {
-            background: rgba(36, 36, 78, 0.88);
+            background: rgba(36,36,78,0.88);
             backdrop-filter: blur(18px);
             -webkit-backdrop-filter: blur(18px);
             box-shadow: 0 4px 30px rgba(0,0,0,0.25);
             border-bottom: 1px solid rgba(255,255,255,0.08);
         }
     </style>
+    <style>
+        body { font-family: 'Sarabun','Poppins',sans-serif; }
+        @keyframes heroPan { 0%{background-position:left center} 50%{background-position:right center} 100%{background-position:left center} }
+        .hero-pan { animation: heroPan 18s ease-in-out infinite; }
+        .masonry { columns:2; column-gap:10px; }
+        @media(min-width:640px){ .masonry{columns:3;} }
+        @media(min-width:1024px){ .masonry{columns:4;} }
+        .masonry-item { break-inside:avoid; margin-bottom:10px; position:relative; overflow:hidden; border-radius:10px; cursor:pointer; }
+        .masonry-item img { width:100%; display:block; transition:transform 0.4s ease; }
+        .masonry-item:hover img { transform:scale(1.06); }
+        .masonry-item .overlay { position:absolute; inset:0; background:linear-gradient(to top,rgba(0,0,0,0.6) 0%,transparent 55%); opacity:0; transition:opacity 0.3s; display:flex; align-items:flex-end; padding:10px; }
+        .masonry-item:hover .overlay { opacity:1; }
+        .chapter-divider { display:flex; align-items:center; gap:16px; margin:52px 0 24px; }
+        .chapter-divider::before,.chapter-divider::after { content:''; flex:1; height:1px; background:linear-gradient(to right,transparent,rgba(171,219,227,0.3)); }
+        .chapter-divider::after { background:linear-gradient(to left,transparent,rgba(171,219,227,0.3)); }
+        .fade-up { opacity:0; transform:translateY(24px); transition:opacity 0.6s ease,transform 0.6s ease; }
+        .fade-up.visible { opacity:1; transform:translateY(0); }
+        #lightbox { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.93); z-index:100; align-items:center; justify-content:center; padding:16px; }
+        #lightbox.open { display:flex; }
+        #lightbox img { max-width:90vw; max-height:88vh; object-fit:contain; border-radius:12px; box-shadow:0 25px 60px rgba(0,0,0,0.5); }
+        #lb-prev,#lb-next { position:absolute; top:50%; transform:translateY(-50%); background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.2); color:#fff; width:48px; height:48px; border-radius:50%; font-size:22px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background 0.2s; user-select:none; }
+        #lb-prev:hover,#lb-next:hover { background:rgba(255,255,255,0.25); }
+        #lb-prev { left:16px; } #lb-next { right:16px; }
+        #lb-close { position:absolute; top:16px; right:16px; background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.2); color:#fff; width:40px; height:40px; border-radius:50%; font-size:18px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background 0.2s; }
+        #lb-close:hover { background:rgba(255,255,255,0.25); }
+        #lb-caption { position:absolute; bottom:20px; left:50%; transform:translateX(-50%); color:#fff; font-size:0.82rem; background:rgba(0,0,0,0.55); padding:5px 18px; border-radius:99px; white-space:nowrap; }
+    </style>
 </head>
-<body class="overflow-x-hidden bg-gray-50">
+<body class="overflow-x-hidden bg-[#0f0f1a]">
 
     <!-- Navbar -->
     <nav id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-500">
         <div class="navbar-inner flex items-center justify-between px-6 md:px-12 py-4 transition-all duration-500">
-
-            <!-- Logo -->
             <a href="index.html" class="flex items-center gap-2 group">
                 <div class="w-9 h-9 rounded-xl bg-white/20 backdrop-blur-sm border border-white/30 flex items-center justify-center group-hover:bg-white/30 transition-all duration-300">
                     <span class="text-white font-bold text-sm">SK</span>
                 </div>
                 <span class="text-white font-semibold text-sm tracking-wider hidden sm:block">Song Kaenthaisong</span>
             </a>
-
-            <!-- Desktop Links -->
             <ul class="hidden md:flex items-center gap-7">
                 <li class="group relative pb-1"><a href="index.html" class="relative text-white/80 hover:text-white text-sm font-medium tracking-wide transition-colors duration-200">Home<span class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-white/70 rounded-full transition-all duration-300 group-hover:w-full"></span></a></li>
                 <li class="group relative pb-1"><a href="gallery.html" class="relative text-white text-sm font-semibold tracking-wide">Gallery<span class="absolute -bottom-1 left-0 w-full h-0.5 bg-white rounded-full"></span></a></li>
                 <li class="group relative pb-1"><a href="explore.html" class="relative text-white/80 hover:text-white text-sm font-medium tracking-wide transition-colors duration-200">Explore<span class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-white/70 rounded-full transition-all duration-300 group-hover:w-full"></span></a></li>
                 <li class="group relative pb-1"><a href="about.html" class="relative text-white/80 hover:text-white text-sm font-medium tracking-wide transition-colors duration-200">About<span class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-white/70 rounded-full transition-all duration-300 group-hover:w-full"></span></a></li>
             </ul>
-
-            <!-- Contact + Hamburger -->
             <div class="flex items-center gap-4">
                 <a href="contact.html" class="hidden md:inline-flex items-center gap-2 bg-white/20 hover:bg-white text-white hover:text-[#49497e] backdrop-blur-sm border border-white/30 text-sm font-medium px-5 py-2 rounded-full transition-all duration-300">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
@@ -157,14 +86,14 @@
     <div id="mobile-menu" class="hidden fixed inset-0 z-40" aria-hidden="true">
         <div id="mobile-overlay" class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
         <div id="mobile-panel" class="absolute top-0 right-0 h-full w-72 bg-[#2d2d5e] shadow-2xl flex flex-col pt-24 px-8 pb-8 gap-2 translate-x-full transition-transform duration-300">
-            <button id="close-menu" class="absolute top-5 right-5 w-9 h-9 flex items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors" aria-label="Close menu">
+            <button id="close-menu" class="absolute top-5 right-5 w-9 h-9 flex items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
             </button>
             <p class="text-white/40 text-xs uppercase tracking-widest mb-4">Navigation</p>
-            <a href="index.html" class="flex items-center gap-3 text-white/80 hover:text-white py-3 border-b border-white/10 transition-colors"><span class="text-lg">🏠</span> Home</a>
-            <a href="gallery.html" class="flex items-center gap-3 text-white font-bold py-3 border-b border-white/10"><span class="text-lg">🖼️</span> Gallery</a>
-            <a href="explore.html" class="flex items-center gap-3 text-white/80 hover:text-white py-3 border-b border-white/10 transition-colors"><span class="text-lg">🔭</span> Explore</a>
-            <a href="about.html" class="flex items-center gap-3 text-white/80 hover:text-white py-3 border-b border-white/10 transition-colors"><span class="text-lg">👤</span> About</a>
+            <a href="index.html" class="flex items-center gap-3 text-white/80 hover:text-white py-3 border-b border-white/10 transition-colors"><span class="text-lg">&#127968;</span> Home</a>
+            <a href="gallery.html" class="flex items-center gap-3 text-white font-bold py-3 border-b border-white/10"><span class="text-lg">&#128444;&#65039;</span> Gallery</a>
+            <a href="explore.html" class="flex items-center gap-3 text-white/80 hover:text-white py-3 border-b border-white/10 transition-colors"><span class="text-lg">&#128301;</span> Explore</a>
+            <a href="about.html" class="flex items-center gap-3 text-white/80 hover:text-white py-3 border-b border-white/10 transition-colors"><span class="text-lg">&#128100;</span> About</a>
             <a href="contact.html" class="mt-6 flex items-center justify-center gap-2 bg-[#abdbe3] text-white font-semibold py-3 rounded-xl hover:opacity-90 transition-opacity">
                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
                 Contact
@@ -172,156 +101,154 @@
         </div>
     </div>
 
-        <!-- Hero -->
-    <header
-        class="hero-pan w-full h-72 md:h-96 bg-cover flex items-center justify-center relative"
-        style="background-image: url('./images/bg1.JPG');"
-    >
-        <div class="absolute inset-0 bg-black/40"></div>
+    <!-- Hero -->
+    <header class="hero-pan w-full h-72 md:h-[420px] bg-cover flex items-center justify-center relative" style="background-image:url('./images2/img52.jpg');">
+        <div class="absolute inset-0 bg-gradient-to-b from-black/50 via-black/40 to-[#0f0f1a]"></div>
         <div class="relative text-white text-center px-4">
             <div class="w-36 h-1 bg-red-500 mx-auto mb-4 rounded-full"></div>
             <h1 class="text-4xl md:text-6xl font-bold tracking-wide">Gallery</h1>
-            <p class="mt-3 text-base md:text-lg text-gray-200">"Moments captured, memories forever."</p>
+            <p class="mt-3 text-base md:text-lg text-gray-300 max-w-lg mx-auto">"ชีวิตที่มีความหมาย — ผ่านสายตาของครอบครัว"</p>
+            <p class="mt-2 text-sm text-gray-400">30 ภาพ &middot; 5 บทแห่งความทรงจำ</p>
         </div>
     </header>
 
-    <!-- Gallery Grid -->
-    <section class="w-11/12 md:w-4/5 mx-auto my-16">
+    <main class="w-11/12 md:w-10/12 lg:w-4/5 mx-auto pb-20">
 
-        <div class="text-center text-[#49497e] mb-10">
-            <h2 class="text-xl md:text-2xl font-semibold">"A picture is worth a thousand words"</h2>
-            <div class="w-36 h-1 bg-red-500 mx-auto mt-3 rounded-full"></div>
+        <div class="chapter-divider fade-up">
+            <div class="text-center px-4">
+                <p class="text-[#abdbe3]/60 text-xs uppercase tracking-widest">Chapter 1</p>
+                <h2 class="text-white font-bold text-xl mt-1">ชั่วขณะเงียบงัน</h2>
+                <p class="text-white/40 text-sm">Quiet Moments</p>
+            </div>
+        </div>
+        <div class="masonry fade-up">
+            <div class="masonry-item" data-index="0"><img src="./images2/img03.jpg" alt="" loading="lazy"><div class="overlay"><span class="text-white text-xs font-medium">เริ่มต้นวัน</span></div></div>
+            <div class="masonry-item" data-index="1"><img src="./images2/img01.jpg" alt="" loading="lazy"><div class="overlay"><span class="text-white text-xs font-medium">ช่วงเวลาส่วนตัว</span></div></div>
+            <div class="masonry-item" data-index="2"><img src="./images2/img02.jpg" alt="" loading="lazy"><div class="overlay"><span class="text-white text-xs font-medium">กาแฟยามเช้า</span></div></div>
+            <div class="masonry-item" data-index="3"><img src="./images2/img14.jpg" alt="" loading="lazy"><div class="overlay"><span class="text-white text-xs font-medium">ออกสำรวจโลก</span></div></div>
+            <div class="masonry-item" data-index="4"><img src="./images2/img40.jpg" alt="" loading="lazy"><div class="overlay"><span class="text-white text-xs font-medium">เส้นทางแห่งความทรงจำ</span></div></div>
+            <div class="masonry-item" data-index="5"><img src="./images2/img39.jpg" alt="" loading="lazy"><div class="overlay"><span class="text-white text-xs font-medium">เด็กน้อยนักคิด</span></div></div>
         </div>
 
-        <!-- Grid 2 cols mobile / 3 cols tablet / layout mix desktop -->
-        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-5">
-
-            <!-- Large card spans 2 cols -->
-            <div class="gallery-card col-span-2 md:col-span-2 h-64 md:h-80 fade-up" data-src="./images/img6.JPG">
-                <img src="./images/img6.JPG" alt="Gallery 1">
-                <div class="overlay"><span class="overlay-icon">&#9654;</span></div>
+        <div class="chapter-divider fade-up">
+            <div class="text-center px-4">
+                <p class="text-[#abdbe3]/60 text-xs uppercase tracking-widest">Chapter 2</p>
+                <h2 class="text-white font-bold text-xl mt-1">ศรัทธาและจิตใจ</h2>
+                <p class="text-white/40 text-sm">Faith & Spirit</p>
             </div>
-
-            <div class="gallery-card h-64 md:h-80 fade-up" data-src="./images/img8.JPG">
-                <img src="./images/img8.JPG" alt="Gallery 2">
-                <div class="overlay"><span class="overlay-icon">&#9654;</span></div>
-            </div>
-
-            <div class="gallery-card h-56 md:h-72 fade-up" data-src="./images/img9.JPG">
-                <img src="./images/img9.JPG" alt="Gallery 3">
-                <div class="overlay"><span class="overlay-icon">&#9654;</span></div>
-            </div>
-
-            <div class="gallery-card h-56 md:h-72 fade-up" data-src="./images/img10.JPG">
-                <img src="./images/img10.JPG" alt="Gallery 4">
-                <div class="overlay"><span class="overlay-icon">&#9654;</span></div>
-            </div>
-
-            <div class="gallery-card h-56 md:h-72 fade-up" data-src="./images/img11.JPG">
-                <img src="./images/img11.JPG" alt="Gallery 5">
-                <div class="overlay"><span class="overlay-icon">&#9654;</span></div>
-            </div>
-
-            <!-- Large card spans 2 cols -->
-            <div class="gallery-card col-span-2 md:col-span-2 h-64 md:h-80 fade-up" data-src="./images/img12.JPG">
-                <img src="./images/img12.JPG" alt="Gallery 6">
-                <div class="overlay"><span class="overlay-icon">&#9654;</span></div>
-            </div>
-
-            <div class="gallery-card h-64 md:h-80 fade-up" data-src="./images/img13.JPG">
-                <img src="./images/img13.JPG" alt="Gallery 7">
-                <div class="overlay"><span class="overlay-icon">&#9654;</span></div>
-            </div>
-
-            <div class="gallery-card h-56 md:h-72 fade-up" data-src="./images/img15.JPG">
-                <img src="./images/img15.JPG" alt="Gallery 8">
-                <div class="overlay"><span class="overlay-icon">&#9654;</span></div>
-            </div>
-
-            <div class="gallery-card h-56 md:h-72 fade-up" data-src="./images/img16.JPG">
-                <img src="./images/img16.JPG" alt="Gallery 9">
-                <div class="overlay"><span class="overlay-icon">&#9654;</span></div>
-            </div>
-
-            <div class="gallery-card h-56 md:h-72 fade-up" data-src="./images/img17.JPG">
-                <img src="./images/img17.JPG" alt="Gallery 10">
-                <div class="overlay"><span class="overlay-icon">&#9654;</span></div>
-            </div>
-
+        </div>
+        <div class="masonry fade-up">
+            <div class="masonry-item" data-index="6"><img src="./images2/img05.jpg" alt="" loading="lazy"><div class="overlay"><span class="text-white text-xs font-medium">พิธีกรรมและศรัทธา</span></div></div>
+            <div class="masonry-item" data-index="7"><img src="./images2/img06.jpg" alt="" loading="lazy"><div class="overlay"><span class="text-white text-xs font-medium">ธรรมะแห่งชีวิต</span></div></div>
+            <div class="masonry-item" data-index="8"><img src="./images2/img08.jpg" alt="" loading="lazy"><div class="overlay"><span class="text-white text-xs font-medium">ความสงบในวัด</span></div></div>
+            <div class="masonry-item" data-index="9"><img src="./images2/img09.jpg" alt="" loading="lazy"><div class="overlay"><span class="text-white text-xs font-medium">ทำบุญร่วมกัน</span></div></div>
+            <div class="masonry-item" data-index="10"><img src="./images2/img15.jpg" alt="" loading="lazy"><div class="overlay"><span class="text-white text-xs font-medium">น้ำใจและศรัทธา</span></div></div>
+            <div class="masonry-item" data-index="11"><img src="./images2/img17.jpg" alt="" loading="lazy"><div class="overlay"><span class="text-white text-xs font-medium">รับธรรมะ</span></div></div>
         </div>
 
-        <!-- Back to Home -->
-        <div class="text-center mt-14">
-            <a href="index.html" class="inline-block bg-[#49497e] text-white px-8 py-3 rounded-full hover:bg-[#006080] transition-colors duration-300 font-medium">
-                &larr; Back to Home
-            </a>
+        <div class="chapter-divider fade-up">
+            <div class="text-center px-4">
+                <p class="text-[#abdbe3]/60 text-xs uppercase tracking-widest">Chapter 3</p>
+                <h2 class="text-white font-bold text-xl mt-1">หัวใจของบ้าน</h2>
+                <p class="text-white/40 text-sm">Heart of the Home</p>
+            </div>
         </div>
-    </section>
+        <div class="masonry fade-up">
+            <div class="masonry-item" data-index="12"><img src="./images2/img18.jpg" alt="" loading="lazy"><div class="overlay"><span class="text-white text-xs font-medium">รอยยิ้มของลูกๆ</span></div></div>
+            <div class="masonry-item" data-index="13"><img src="./images2/img19.jpg" alt="" loading="lazy"><div class="overlay"><span class="text-white text-xs font-medium">ยอดเขาแห่งความฝัน</span></div></div>
+            <div class="masonry-item" data-index="14"><img src="./images2/img21.jpg" alt="" loading="lazy"><div class="overlay"><span class="text-white text-xs font-medium">ต้นไม้ใหญ่แห่งความทรงจำ</span></div></div>
+            <div class="masonry-item" data-index="15"><img src="./images2/img22.jpg" alt="" loading="lazy"><div class="overlay"><span class="text-white text-xs font-medium">แสงเทียนแห่งศรัทธา</span></div></div>
+            <div class="masonry-item" data-index="16"><img src="./images2/img31.jpg" alt="" loading="lazy"><div class="overlay"><span class="text-white text-xs font-medium">นักผจญภัยตัวน้อย</span></div></div>
+            <div class="masonry-item" data-index="17"><img src="./images2/img32.jpg" alt="" loading="lazy"><div class="overlay"><span class="text-white text-xs font-medium">วันแห่งน้ำ</span></div></div>
+        </div>
 
-    <!-- Footer -->
-    <footer class="w-full py-8 px-4 md:px-10 bg-[#006080] text-center">
-        <p class="text-white my-3">"The greatest joys in life are found in the simple moments spent with loved ones."</p>
-        <div class="mt-4 flex items-center justify-center gap-2">
-            <span class="text-gray-300 text-xs uppercase tracking-wider">Visitors</span>
+        <div class="chapter-divider fade-up">
+            <div class="text-center px-4">
+                <p class="text-[#abdbe3]/60 text-xs uppercase tracking-widest">Chapter 4</p>
+                <h2 class="text-white font-bold text-xl mt-1">ออกไปสู่โลกกว้าง</h2>
+                <p class="text-white/40 text-sm">Into the Wide World</p>
+            </div>
+        </div>
+        <div class="masonry fade-up">
+            <div class="masonry-item" data-index="18"><img src="./images2/img11.jpg" alt="" loading="lazy"><div class="overlay"><span class="text-white text-xs font-medium">ล่องแก่งด้วยกัน</span></div></div>
+            <div class="masonry-item" data-index="19"><img src="./images2/img12.jpg" alt="" loading="lazy"><div class="overlay"><span class="text-white text-xs font-medium">ความสนุกในสายน้ำ</span></div></div>
+            <div class="masonry-item" data-index="20"><img src="./images2/img13.jpg" alt="" loading="lazy"><div class="overlay"><span class="text-white text-xs font-medium">ทีมแห่งความสุข</span></div></div>
+            <div class="masonry-item" data-index="21"><img src="./images2/img41.jpg" alt="" loading="lazy"><div class="overlay"><span class="text-white text-xs font-medium">แคมป์ในป่า</span></div></div>
+            <div class="masonry-item" data-index="22"><img src="./images2/img42.jpg" alt="" loading="lazy"><div class="overlay"><span class="text-white text-xs font-medium">จุดชมวิวแห่งชีวิต</span></div></div>
+            <div class="masonry-item" data-index="23"><img src="./images2/img49.jpg" alt="" loading="lazy"><div class="overlay"><span class="text-white text-xs font-medium">พ่อกับลูก สูงสุดแดนฟ้า</span></div></div>
+        </div>
+
+        <div class="chapter-divider fade-up">
+            <div class="text-center px-4">
+                <p class="text-[#abdbe3]/60 text-xs uppercase tracking-widest">Chapter 5</p>
+                <h2 class="text-white font-bold text-xl mt-1">รักและความสุข</h2>
+                <p class="text-white/40 text-sm">Love & Joy</p>
+            </div>
+        </div>
+        <div class="masonry fade-up">
+            <div class="masonry-item" data-index="24"><img src="./images2/img26.jpg" alt="" loading="lazy"><div class="overlay"><span class="text-white text-xs font-medium">รอยยิ้มที่สวยที่สุด</span></div></div>
+            <div class="masonry-item" data-index="25"><img src="./images2/img45.jpg" alt="" loading="lazy"><div class="overlay"><span class="text-white text-xs font-medium">ท่ามกลางดอกไม้</span></div></div>
+            <div class="masonry-item" data-index="26"><img src="./images2/img47.jpg" alt="" loading="lazy"><div class="overlay"><span class="text-white text-xs font-medium">ความงามแห่งชีวิต</span></div></div>
+            <div class="masonry-item" data-index="27"><img src="./images2/img48.jpg" alt="" loading="lazy"><div class="overlay"><span class="text-white text-xs font-medium">พี่น้องร่วมทาง</span></div></div>
+            <div class="masonry-item" data-index="28"><img src="./images2/img50.jpg" alt="" loading="lazy"><div class="overlay"><span class="text-white text-xs font-medium">แม่กับลูก สวนชา</span></div></div>
+            <div class="masonry-item" data-index="29"><img src="./images2/img52.jpg" alt="" loading="lazy"><div class="overlay"><span class="text-white text-xs font-medium">ครอบครัวและความทรงจำ</span></div></div>
+        </div>
+
+        <div class="text-center mt-16 fade-up">
+            <a href="index.html" class="inline-block bg-white/10 hover:bg-white text-white hover:text-[#49497e] border border-white/20 px-8 py-3 rounded-full transition-all duration-300 font-medium">&larr; Back to Home</a>
+        </div>
+    </main>
+
+    <footer class="w-full py-8 px-4 bg-[#06060f] text-center border-t border-white/5">
+        <p class="text-white/50 my-3 text-sm">"The greatest joys in life are found in the simple moments spent with loved ones."</p>
+        <div class="mt-3 flex items-center justify-center gap-2">
+            <span class="text-white/30 text-xs uppercase tracking-wider">Visitors</span>
             <img src="https://visitor-badge.laobi.icu/badge?page_id=SongKaenthaisong.blog" alt="visitors" class="h-5 rounded">
         </div>
-        <p class="text-gray-200 my-3 text-sm">Copyright &copy; 2024 Outdoor Adventure &mdash; Created by Song Kaenthaisong</p>
+        <p class="text-white/25 my-3 text-xs">Copyright &copy; 2024 Outdoor Adventure &mdash; Created by Song Kaenthaisong</p>
     </footer>
 
-    <!-- Lightbox -->
     <div id="lightbox">
-        <button id="lb-prev" class="absolute left-4 md:left-10 text-white text-5xl font-bold select-none hover:text-orange-400 transition-colors z-10">&#8249;</button>
-        <img id="lb-img" src="" alt="Lightbox Image">
-        <button id="lb-next" class="absolute right-4 md:right-10 text-white text-5xl font-bold select-none hover:text-orange-400 transition-colors z-10">&#8250;</button>
-        <button id="lb-close" class="absolute top-5 right-5 text-white text-4xl font-bold hover:text-orange-400 transition-colors">&times;</button>
-        <!-- Counter -->
-        <div id="lb-counter" class="absolute bottom-6 left-1/2 -translate-x-1/2 text-white text-sm bg-black/40 px-4 py-1 rounded-full"></div>
+        <button id="lb-close"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
+        <button id="lb-prev">&#8249;</button>
+        <img id="lb-img" src="" alt="">
+        <button id="lb-next">&#8250;</button>
+        <div id="lb-caption"></div>
     </div>
 
     <script>
-        // Navbar scroll effect
         const nav = document.getElementById('navbar')
-        window.addEventListener('scroll', () => {
-            nav.classList.toggle('scrolled', window.scrollY > 40)
-        })
-
-        // Mobile menu
+        window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 40))
         const menuBtn = document.getElementById('menu-btn')
         const mobileMenu = document.getElementById('mobile-menu')
         const mobilePanel = document.getElementById('mobile-panel')
         const mobileOverlay = document.getElementById('mobile-overlay')
         const closeMenuBtn = document.getElementById('close-menu')
-
-        function openMenu() {
-            mobileMenu.classList.remove('hidden')
-            mobileMenu.removeAttribute('aria-hidden')
-            setTimeout(() => mobilePanel.classList.remove('translate-x-full'), 10)
-            document.body.style.overflow = 'hidden'
-        }
-        function closeMenuFn() {
-            mobilePanel.classList.add('translate-x-full')
-            setTimeout(() => {
-                mobileMenu.classList.add('hidden')
-                mobileMenu.setAttribute('aria-hidden', 'true')
-            }, 300)
-            document.body.style.overflow = ''
-        }
+        function openMenu() { mobileMenu.classList.remove('hidden'); mobileMenu.removeAttribute('aria-hidden'); setTimeout(()=>mobilePanel.classList.remove('translate-x-full'),10); document.body.style.overflow='hidden' }
+        function closeMenuFn() { mobilePanel.classList.add('translate-x-full'); setTimeout(()=>{ mobileMenu.classList.add('hidden'); mobileMenu.setAttribute('aria-hidden','true') },300); document.body.style.overflow='' }
         menuBtn.addEventListener('click', openMenu)
         closeMenuBtn.addEventListener('click', closeMenuFn)
         mobileOverlay.addEventListener('click', closeMenuFn)
-
-        
-        // Fade-up on scroll
         const fadeEls = document.querySelectorAll('.fade-up')
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach((entry, i) => {
-                if (entry.isIntersecting) {
-                    setTimeout(() => entry.target.classList.add('visible'), i * 80)
-                    observer.unobserve(entry.target)
-                }
-            })
-        }, { threshold: 0.1 })
-        fadeEls.forEach(el => observer.observe(el))
+        const obs = new IntersectionObserver((entries)=>{ entries.forEach((e,i)=>{ if(e.isIntersecting){ setTimeout(()=>e.target.classList.add('visible'),i*80); obs.unobserve(e.target) } }) },{ threshold:0.05 })
+        fadeEls.forEach(el=>obs.observe(el))
+        const items = document.querySelectorAll('.masonry-item')
+        const lb = document.getElementById('lightbox')
+        const lbImg = document.getElementById('lb-img')
+        const lbCaption = document.getElementById('lb-caption')
+        const lbClose = document.getElementById('lb-close')
+        const lbPrev = document.getElementById('lb-prev')
+        const lbNext = document.getElementById('lb-next')
+        let cur = 0
+        const imgs = Array.from(items).map(item=>({ src:item.querySelector('img').src, cap:item.querySelector('.overlay span').textContent }))
+        function openLB(i){ cur=i; lbImg.src=imgs[i].src; lbCaption.textContent=imgs[i].cap+' ('+(i+1)+' / '+imgs.length+')'; lb.classList.add('open'); document.body.style.overflow='hidden' }
+        function closeLB(){ lb.classList.remove('open'); document.body.style.overflow='' }
+        items.forEach(item=>item.addEventListener('click',()=>openLB(parseInt(item.dataset.index))))
+        lbClose.addEventListener('click', closeLB)
+        lbNext.addEventListener('click', ()=>openLB((cur+1)%imgs.length))
+        lbPrev.addEventListener('click', ()=>openLB((cur-1+imgs.length)%imgs.length))
+        lb.addEventListener('click', e=>{ if(e.target===lb) closeLB() })
+        document.addEventListener('keydown', e=>{ if(!lb.classList.contains('open'))return; if(e.key==='ArrowRight') openLB((cur+1)%imgs.length); if(e.key==='ArrowLeft') openLB((cur-1+imgs.length)%imgs.length); if(e.key==='Escape') closeLB() })
     </script>
 </body>
 </html>
