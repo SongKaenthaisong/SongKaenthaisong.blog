@@ -68,34 +68,74 @@
         gtag('js', new Date());
         gtag('config', 'G-XXXXXXXXXX');
     </script>
+    <style id="navbar-style">
+        #navbar .navbar-inner { background: transparent; }
+        #navbar.scrolled .navbar-inner {
+            background: rgba(36, 36, 78, 0.88);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            box-shadow: 0 4px 30px rgba(0,0,0,0.25);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+    </style>
 </head>
 <body class="overflow-x-hidden bg-gray-50">
 
     <!-- Navbar -->
-    <nav class="absolute top-0 left-0 w-full flex justify-between items-center px-6 py-5 z-20">
-        <ul class="hidden md:flex items-center gap-8 text-white">
-            <li class="hover:text-orange-400 transition-colors"><a href="index.html">Home</a></li>
-            <li class="hover:text-orange-400 transition-colors"><a href="gallery.html">Gallery</a></li>
-            <li class="hover:text-orange-400 transition-colors"><a href="explore.html">Explore</a></li>
-            <li class="underline font-bold"><a href="about.html">About</a></li>
-            <li><a href="contact.html" class="bg-[#abdbe3] text-white px-4 py-2 rounded-full hover:opacity-80 transition-opacity">Contact</a></li>
-        </ul>
-        <button id="menu-btn" class="md:hidden focus:outline-none" aria-label="Open menu">
-            <img src="./images/menu-btn.png" alt="menu" class="w-9">
-        </button>
+    <nav id="navbar" class="fixed top-0 left-0 w-full z-50 transition-all duration-500">
+        <div class="navbar-inner flex items-center justify-between px-6 md:px-12 py-4 transition-all duration-500">
+
+            <!-- Logo -->
+            <a href="index.html" class="flex items-center gap-2 group">
+                <div class="w-9 h-9 rounded-xl bg-white/20 backdrop-blur-sm border border-white/30 flex items-center justify-center group-hover:bg-white/30 transition-all duration-300">
+                    <span class="text-white font-bold text-sm">SK</span>
+                </div>
+                <span class="text-white font-semibold text-sm tracking-wider hidden sm:block">Song Kaenthaisong</span>
+            </a>
+
+            <!-- Desktop Links -->
+            <ul class="hidden md:flex items-center gap-7">
+                <li class="group relative pb-1"><a href="index.html" class="relative text-white/80 hover:text-white text-sm font-medium tracking-wide transition-colors duration-200">Home<span class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-white/70 rounded-full transition-all duration-300 group-hover:w-full"></span></a></li>
+                <li class="group relative pb-1"><a href="gallery.html" class="relative text-white/80 hover:text-white text-sm font-medium tracking-wide transition-colors duration-200">Gallery<span class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-white/70 rounded-full transition-all duration-300 group-hover:w-full"></span></a></li>
+                <li class="group relative pb-1"><a href="explore.html" class="relative text-white/80 hover:text-white text-sm font-medium tracking-wide transition-colors duration-200">Explore<span class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-white/70 rounded-full transition-all duration-300 group-hover:w-full"></span></a></li>
+                <li class="group relative pb-1"><a href="about.html" class="relative text-white text-sm font-semibold tracking-wide">About<span class="absolute -bottom-1 left-0 w-full h-0.5 bg-white rounded-full"></span></a></li>
+            </ul>
+
+            <!-- Contact + Hamburger -->
+            <div class="flex items-center gap-4">
+                <a href="contact.html" class="hidden md:inline-flex items-center gap-2 bg-white/20 hover:bg-white text-white hover:text-[#49497e] backdrop-blur-sm border border-white/30 text-sm font-medium px-5 py-2 rounded-full transition-all duration-300">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                    Contact
+                </a>
+                <button id="menu-btn" class="md:hidden w-9 h-9 flex flex-col justify-center items-center gap-1.5 focus:outline-none group" aria-label="Open menu">
+                    <span class="block w-6 h-0.5 bg-white rounded-full transition-all duration-300 group-hover:w-7"></span>
+                    <span class="block w-4 h-0.5 bg-white rounded-full transition-all duration-300 group-hover:w-7"></span>
+                    <span class="block w-6 h-0.5 bg-white rounded-full transition-all duration-300 group-hover:w-7"></span>
+                </button>
+            </div>
+        </div>
     </nav>
 
-    <!-- Mobile Menu Overlay -->
-    <div id="mobile-menu" class="hidden fixed inset-0 bg-[#484870] z-30 flex-col items-center justify-center gap-8 text-white text-xl">
-        <button id="close-menu" class="absolute top-6 right-6 text-3xl text-white">&times;</button>
-        <a href="index.html" class="hover:text-orange-400 transition-colors">Home</a>
-        <a href="gallery.html" class="hover:text-orange-400 transition-colors">Gallery</a>
-        <a href="explore.html" class="hover:text-orange-400 transition-colors">Explore</a>
-        <a href="about.html" class="underline font-bold hover:text-orange-400 transition-colors">About</a>
-        <a href="contact.html" class="bg-[#abdbe3] px-6 py-2 rounded-full hover:opacity-80 transition-opacity">Contact</a>
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden fixed inset-0 z-40" aria-hidden="true">
+        <div id="mobile-overlay" class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+        <div id="mobile-panel" class="absolute top-0 right-0 h-full w-72 bg-[#2d2d5e] shadow-2xl flex flex-col pt-24 px-8 pb-8 gap-2 translate-x-full transition-transform duration-300">
+            <button id="close-menu" class="absolute top-5 right-5 w-9 h-9 flex items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors" aria-label="Close menu">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+            <p class="text-white/40 text-xs uppercase tracking-widest mb-4">Navigation</p>
+            <a href="index.html" class="flex items-center gap-3 text-white/80 hover:text-white py-3 border-b border-white/10 transition-colors"><span class="text-lg">🏠</span> Home</a>
+            <a href="gallery.html" class="flex items-center gap-3 text-white/80 hover:text-white py-3 border-b border-white/10 transition-colors"><span class="text-lg">🖼️</span> Gallery</a>
+            <a href="explore.html" class="flex items-center gap-3 text-white/80 hover:text-white py-3 border-b border-white/10 transition-colors"><span class="text-lg">🔭</span> Explore</a>
+            <a href="about.html" class="flex items-center gap-3 text-white font-bold py-3 border-b border-white/10"><span class="text-lg">👤</span> About</a>
+            <a href="contact.html" class="mt-6 flex items-center justify-center gap-2 bg-[#abdbe3] text-white font-semibold py-3 rounded-xl hover:opacity-90 transition-opacity">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                Contact
+            </a>
+        </div>
     </div>
 
-    <!-- Hero -->
+        <!-- Hero -->
     <header
         class="hero-pan w-full h-72 md:h-96 bg-cover flex items-center justify-center relative"
         style="background-image: url('./images/bg2.JPG');"
@@ -282,20 +322,38 @@
     </footer>
 
     <script>
+        // Navbar scroll effect
+        const nav = document.getElementById('navbar')
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 40)
+        })
+
         // Mobile menu
         const menuBtn = document.getElementById('menu-btn')
         const mobileMenu = document.getElementById('mobile-menu')
-        const closeMenu = document.getElementById('close-menu')
+        const mobilePanel = document.getElementById('mobile-panel')
+        const mobileOverlay = document.getElementById('mobile-overlay')
+        const closeMenuBtn = document.getElementById('close-menu')
 
-        menuBtn.addEventListener('click', () => {
+        function openMenu() {
             mobileMenu.classList.remove('hidden')
-            mobileMenu.classList.add('flex')
-        })
-        closeMenu.addEventListener('click', () => {
-            mobileMenu.classList.add('hidden')
-            mobileMenu.classList.remove('flex')
-        })
+            mobileMenu.removeAttribute('aria-hidden')
+            setTimeout(() => mobilePanel.classList.remove('translate-x-full'), 10)
+            document.body.style.overflow = 'hidden'
+        }
+        function closeMenuFn() {
+            mobilePanel.classList.add('translate-x-full')
+            setTimeout(() => {
+                mobileMenu.classList.add('hidden')
+                mobileMenu.setAttribute('aria-hidden', 'true')
+            }, 300)
+            document.body.style.overflow = ''
+        }
+        menuBtn.addEventListener('click', openMenu)
+        closeMenuBtn.addEventListener('click', closeMenuFn)
+        mobileOverlay.addEventListener('click', closeMenuFn)
 
+        
         // Fade-up on scroll
         const fadeEls = document.querySelectorAll('.fade-up')
         const observer = new IntersectionObserver((entries) => {
